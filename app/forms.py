@@ -7,6 +7,7 @@ from app.models import User
 from wtforms import TextAreaField
 from wtforms.validators import Length
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -34,4 +35,8 @@ class RegistrationForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=40)])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    submit = SubmitField('Submit')
+
+    
+class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
