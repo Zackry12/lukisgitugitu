@@ -19,7 +19,7 @@ def before_request():
 @app.route('/index')
 @login_required
 def index():
-    user = {'username': 'Miguel'}
+    users = db.session.scalars(sa.select(User)).all()
     posts = [
         {
             'author': {'username': 'John'},
@@ -30,7 +30,8 @@ def index():
             'body': 'The Avengers movie was so cool!'
         }
     ]
-    return render_template('index.html', title='Home', posts=posts)
+   
+    return render_template('index.html', title='Home', users=users, posts=posts)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -67,7 +68,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Account succesfully created. (very necessary feature trust trust)')
+        flash('Account succesfully created.)')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
