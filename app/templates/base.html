@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     {% if title %}
     <title>{{ title }} - LukisGituGitu</title>
     {% else %}
@@ -10,18 +11,6 @@
     {% endif %}
 </head>
 <body>
-    <div>
-        LukisGituGitu: 
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('explore') }}">Explore</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout')}}">Logout</a>
-        {% endif %}
-    </div>
-    <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
@@ -31,6 +20,17 @@
     </ul>
     {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
+    <div id="title"><h1>LukisGituGitu</h1></div>
+    <div class="content">{% block content %}{% endblock %}</div>
+    <div class="navigationBar">
+        <a class="navLink" href="{{ url_for('index') }}">Home</a>
+        <a class="navLink" href="{{ url_for('explore') }}">Explore</a>
+        {% if current_user.is_anonymous %}
+        <a class="navLink" href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a class="navLink" href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+        <a class="navLink" href="{{ url_for('logout')}}">Logout</a>
+        {% endif %}
+    </div>
 </body>
 </html>

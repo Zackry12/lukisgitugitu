@@ -1,0 +1,56 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#title{
+    background-color: orange;
+    color: wheat;
+    height: 15%;
+    margin: 0;
+}
+
+#title h1{
+    margin-top:0;
+    margin-left: 1%;
+}
+
+.content{
+    margin: 8px;
+}
+
+.navigationBar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8%;
+    background-color:   orange;
+}
+
+.navLink {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    text-decoration: none;
+    outline: none;
+
+    color: wheat;
+    border-right: 3px dotted white;
+}
+
+.navLink:last-child {
+    border-right: none;
+}
+
+body{
+    padding-bottom: 6%;
+}
+
+.postComment{
+    margin: 0.5em 0;
+    overflow-wrap: anywhere;
+}
