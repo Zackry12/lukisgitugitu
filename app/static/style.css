@@ -4,15 +4,18 @@ body{
 }
 
 #title{
-    background-color: orange;
+    display: flex;
+    align-items: center;
+    background-color: orangered;
     color: wheat;
-    height: 15%;
     margin: 0;
+    padding: 0.6em 0 0 0;
 }
 
 #title h1{
     margin-top:0;
     margin-left: 1%;
+    font-size: 2.7em;
 }
 
 .content{
@@ -27,22 +30,27 @@ body{
     bottom: 0;
     left: 0;
     right: 0;
-    height: 8%;
     background-color:   orange;
 }
 
-.navLink {
+.nav-link {
     flex: 1;
     text-align: center;
-    padding: 15px 0;
     text-decoration: none;
     outline: none;
+    font-size: 1.6em;
+    padding: 0.3em 0;
+    font-family: Arial, Helvetica, sans-serif;
 
     color: wheat;
     border-right: 3px dotted white;
 }
 
-.navLink:last-child {
+.active{
+    background-color: #c58702;
+}
+
+.nav-link:last-child {
     border-right: none;
 }
 
@@ -53,4 +61,8 @@ body{
 .postComment{
     margin: 0.5em 0;
     overflow-wrap: anywhere;
+}
+
+h4{
+    color: gray;
 }

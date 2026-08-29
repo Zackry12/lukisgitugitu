@@ -95,6 +95,21 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
+@app.route('/canvas-setup')
+@login_required
+def canvas_setup():
+    return render_template('canvas_setup.html')
+
+
+@app.route('/draw')
+@login_required
+def draw():
+    width = request.args.get("width", type=int)
+    height = request.args.get("height", type=int)
+
+    return render_template("draw.html", width=width, height=height)
+
+
 @app.route('/user/<username>')
 @login_required
 def user(username):

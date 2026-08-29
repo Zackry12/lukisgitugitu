@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='draw.css') }}">
+{% endblock %}
+{% block content %}
+<div id="canvas-data" data-width="{{ width }}" data-height="{{ height }}"></div>
+
+<div id="container">
+    <div id="grid"></div>
+    <div id="color-grid">
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='draw.js') }}"></script>
+{% endblock %}
