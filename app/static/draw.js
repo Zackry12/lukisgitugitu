@@ -4,9 +4,11 @@ const grid = document.querySelector('#grid');
 const width = Number(canvasData.dataset.width);
 const height = Number(canvasData.dataset.height);
 const colorGrid = document.querySelector('#color-grid')
+const gridButton = document.querySelector('#grid-button')
 let colorList = ["white","black","blue","red","green","yellow","purple","grey","orange","pink"]
 let current_color = "black"
 let pointerdown = false;
+let gridMode = false
 
 document.addEventListener('pointerdown', () => {
     pointerdown = true;
@@ -67,6 +69,24 @@ function gridColorSetup(colorList){
         colorGrid.appendChild(colorGridItem)
     }
 }
+
+
+gridButton.addEventListener('pointerdown', () => {
+    const gridItem = document.querySelectorAll('.grid-item')
+    if (gridMode === false){
+        gridMode = true
+        gridButton.textContent = "Grid Mode: On"
+        for (let item of gridItem){
+            item.classList.add('grid-border')
+        }}
+    else{
+        gridMode = false
+        gridButton.textContent = "Grid Mode: Off"
+        for (let item of gridItem){
+            item.classList.remove('grid-border')
+        }
+    }
+})
 
 gridMaker(width, height)
 gridColorSetup(colorList)
