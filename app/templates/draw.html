@@ -7,9 +7,24 @@
 <div id="canvas-data" data-width="{{ width }}" data-height="{{ height }}"></div>
 
 <div id="container">
-    <div id="grid"></div>
-    <div id="color-grid"></div>
+    <div id="container-2">
+        <div id="grid"></div>
+        <div id="color-grid"></div>
+    </div>
     <button id="grid-button">Grid mode: off</button>
+    <!-- <button id="finish-button">Finish</button> -->
+    <form action="{{ url_for('index') }}" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error}} ]</span>
+            {% endfor %}
+        </p>
+        {{ form.drawing() }}
+        <p>{{ form.submit() }}</p>
+    </form>
 </div>
 
 <script src="{{ url_for('static', filename='draw.js') }}"></script>

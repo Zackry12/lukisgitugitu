@@ -4,7 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 import sqlalchemy as sa
 from app import db
 from app.models import User
-from wtforms import TextAreaField
+from wtforms import TextAreaField, HiddenField
 from wtforms.validators import Length
 
 
@@ -16,8 +16,7 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired(), Length(max=25)])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
@@ -27,10 +26,6 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Pleaseeee use a different username.')
 
-    def validate_email(self, email):
-        user = db.session.scalar(sa.select(User).where(User.email == email.data))
-        if user is not None:
-            raise ValidationError('Pleaseee use a different email address.')
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=40)])
@@ -43,5 +38,6 @@ class EmptyForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
+    post = TextAreaField('Caption', validators=[DataRequired(), Length(min=1, max=140)])
+    drawing = HiddenField()
     submit = SubmitField('Submit')

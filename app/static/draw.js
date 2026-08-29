@@ -5,12 +5,16 @@ const width = Number(canvasData.dataset.width);
 const height = Number(canvasData.dataset.height);
 const colorGrid = document.querySelector('#color-grid')
 const gridButton = document.querySelector('#grid-button')
+const finishButton = document.querySelector('#finish-button')
+const form = document.querySelector("form")
 let colorList = ["white","black","blue","red","green","yellow","purple","grey","orange","pink"]
 let current_color = "black"
 let pointerdown = false;
 let gridMode = false
 
+const gridData = Array(height * width).fill("white")
 
+console.log(gridData)
 document.addEventListener('pointerdown', () => {
     pointerdown = true;
 })
@@ -21,16 +25,17 @@ document.addEventListener('pointerup', () => {
 
 
 function gridMaker(width, height){
-    for (let i = 0; i < height; i++){
+    for (let row = 0; row < height; row++){
         const gridRow = document.createElement('div');
         for (let i=0; i < width; i++){
+            let index = i + (width * row)
             const gridItem = document.createElement('div');
             gridItem.classList.add('grid-item');
             gridItem.addEventListener('pointerover', () => {
                 if (pointerdown === true){
-                    color(gridItem)}})
+                    color(gridItem, index)}})
             gridItem.addEventListener('pointerdown', () => {
-                color(gridItem)})
+                color(gridItem, index)})
             gridRow.appendChild(gridItem);
         }
     gridRow.classList.add('grid-row')
@@ -39,12 +44,15 @@ function gridMaker(width, height){
 }
 
 
-function color(gridItem){
+function color(gridItem, index){
     if (current_color === "rainbow"){
-        gridItem.style.backgroundColor = colorList[Math.floor(Math.random() * colorList.length)];
+        rainbow_color = colorList[Math.floor(Math.random() * colorList.length)]
+        gridItem.style.backgroundColor = rainbow_color;
+        gridData[index] =  rainbow_color
     }
     else{
-        gridItem.style.backgroundColor = current_color
+        gridItem.style.backgroundColor = current_color 
+        gridData[index] =  current_color
     }
 }
 
@@ -90,7 +98,10 @@ gridButton.addEventListener('pointerdown', () => {
     }
 })
 
-
 gridMaker(width, height)
 gridColorSetup(colorList)
+
+form.addEventListener("submit", (event) => {
+    document.querySelector("#drawing").value = JSON.stringify(gridData)
+})
 

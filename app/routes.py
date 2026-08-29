@@ -21,10 +21,11 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        post = Post(body=form.post.data, drawing=form.drawing.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Succesfully posted')
+        print("DRAWIN", form.drawing.data)
         return redirect(url_for('index'))
     
     page = request.args.get('page', 1, type=int)
@@ -86,7 +87,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -106,8 +107,9 @@ def canvas_setup():
 def draw():
     width = request.args.get("width", type=int)
     height = request.args.get("height", type=int)
+    form = PostForm()
 
-    return render_template("draw.html", width=width, height=height)
+    return render_template("draw.html", width=width, height=height, form=form)
 
 
 @app.route('/user/<username>')
