@@ -34,6 +34,7 @@
         <a class="nav-link  {% if request.endpoint == 'logout' %}active{% endif %}" href="{{ url_for('logout')}}">Logout</a>
         {% endif %}
     </div>
+    {{ moment.include_moment() }}
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

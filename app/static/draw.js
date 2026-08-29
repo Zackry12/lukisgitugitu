@@ -10,6 +10,7 @@ let current_color = "black"
 let pointerdown = false;
 let gridMode = false
 
+
 document.addEventListener('pointerdown', () => {
     pointerdown = true;
 })
@@ -17,6 +18,7 @@ document.addEventListener('pointerdown', () => {
 document.addEventListener('pointerup', () => {
     pointerdown = false;
 })
+
 
 function gridMaker(width, height){
     for (let i = 0; i < height; i++){
@@ -87,6 +89,7 @@ gridButton.addEventListener('pointerdown', () => {
         }
     }
 })
+
 
 gridMaker(width, height)
 gridColorSetup(colorList)
