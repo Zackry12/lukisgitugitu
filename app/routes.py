@@ -185,3 +185,12 @@ def unfollow(username):
     else:
         return(redirect(url_for('index')))
 
+
+@app.route('/post/<int:id>')
+@login_required
+def post(id):
+    post = db.session.scalar(sa.select(Post).where(Post.id == id))
+    if post is None:
+        flash('Post not found.')
+        return redirect(url_for('index'))
+    return render_template('post.html', post=post)

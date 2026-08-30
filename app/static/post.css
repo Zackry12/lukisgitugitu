@@ -1,0 +1,51 @@
+.single-post-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    gap: 10px;
+}
+
+.drawing-canvas{
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+}
+
+
+.image{
+    border: 1px solid black;
+    padding: 1px;
+}
+
+.user-body-container{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    width: 100%;
+}
+
+.body-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 200px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.username-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.body{
+    overflow-wrap: anywhere;
+    width: 100%;
+    padding-top: 1px;
+}

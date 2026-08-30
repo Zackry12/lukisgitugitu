@@ -66,3 +66,17 @@ body{
 h4{
     color: gray;
 }
+
+.drawing-canvas{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+.post-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    width: 100%;
+}

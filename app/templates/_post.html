@@ -1,10 +1,13 @@
     <table>
         <tr valign="top">
-            <td><img src="{{ post.author.avatar(36) }}"></td>
-            <td>
-                <a href="{{ url_for('user', username=post.author.username) }}">
-                    {{ post.author.username }}</a> {{ moment(post.timestamp).fromNow() }}
-                <p class="postComment">{{ post.body }} {{post.drawing}}</p>
+  
+                <div class="drawing" 
+                data-drawing="{{ post.drawing }}"
+                data-id="{{ post.id }}">
+                <a href="{{ url_for('post', id=post.id) }}">
+                    <canvas class="drawing-canvas"></canvas>
+                </a>
+                </div>
             </td>
         </tr>
     </table>

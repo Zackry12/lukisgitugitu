@@ -12,7 +12,7 @@ let current_color = "black"
 let pointerdown = false;
 let gridMode = false
 
-const gridData = Array(height * width).fill("white")
+const gridData = Array(height).fill().map(() => Array(width).fill("white"))
 
 console.log(gridData)
 document.addEventListener('pointerdown', () => {
@@ -27,15 +27,14 @@ document.addEventListener('pointerup', () => {
 function gridMaker(width, height){
     for (let row = 0; row < height; row++){
         const gridRow = document.createElement('div');
-        for (let i=0; i < width; i++){
-            let index = i + (width * row)
+        for (let column=0; column < width; column++){
             const gridItem = document.createElement('div');
             gridItem.classList.add('grid-item');
             gridItem.addEventListener('pointerover', () => {
                 if (pointerdown === true){
-                    color(gridItem, index)}})
+                    color(gridItem, row, column)}})
             gridItem.addEventListener('pointerdown', () => {
-                color(gridItem, index)})
+                color(gridItem, row, column)})
             gridRow.appendChild(gridItem);
         }
     gridRow.classList.add('grid-row')
@@ -44,15 +43,15 @@ function gridMaker(width, height){
 }
 
 
-function color(gridItem, index){
+function color(gridItem, row, column){
     if (current_color === "rainbow"){
         rainbow_color = colorList[Math.floor(Math.random() * colorList.length)]
         gridItem.style.backgroundColor = rainbow_color;
-        gridData[index] =  rainbow_color
+        gridData[row][column] =  rainbow_color
     }
     else{
         gridItem.style.backgroundColor = current_color 
-        gridData[index] =  current_color
+        gridData[row][column] =  current_color
     }
 }
 
@@ -97,6 +96,7 @@ gridButton.addEventListener('pointerdown', () => {
         }
     }
 })
+
 
 gridMaker(width, height)
 gridColorSetup(colorList)

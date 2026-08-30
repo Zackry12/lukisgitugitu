@@ -2,26 +2,15 @@
 
 {% block content %}
     <h4>Logged in as - {{ current_user.username }}</h4>
-    {% if form %}
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.post.label }}<br>
-            {{ form.post(cols=32, rows=4) }}
-            {% for error in form.post.errors %}
-            <span style="color: red;">[{{ error}} ]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    {% endif %}
-    {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %}
-    {% if prev_url %}
-    <a href="{{ prev_url }}">Newer posts</a>
-    {% endif %}
-    {% if next_url %}
-    <a href="{{ next_url }}">Older posts</a>
-    {% endif %}
+    <div class="post-container">
+        {% for post in posts %}
+            {% include '_post.html' %}
+        {% endfor %}
+        {% if prev_url %}
+        <a href="{{ prev_url }}">Newer posts</a>
+        {% endif %}
+        {% if next_url %}
+        <a href="{{ next_url }}">Older posts</a>
+        {% endif %}
+    </div>
 {% endblock %}
