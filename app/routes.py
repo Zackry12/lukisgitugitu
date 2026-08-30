@@ -193,4 +193,4 @@ def post(id):
     if post is None:
         flash('Post not found.')
         return redirect(url_for('index'))
-    return render_template('post.html', post=post)
+    return render_template('post.html', post=post, id=id)

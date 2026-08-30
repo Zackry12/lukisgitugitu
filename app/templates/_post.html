@@ -1,13 +1,18 @@
-    <table>
-        <tr valign="top">
-  
-                <div class="drawing" 
-                data-drawing="{{ post.drawing }}"
-                data-id="{{ post.id }}">
-                <a href="{{ url_for('post', id=post.id) }}">
-                    <canvas class="drawing-canvas"></canvas>
-                </a>
-                </div>
-            </td>
-        </tr>
-    </table>
+
+{% if post.id == 1 %}
+<div class="drawing" 
+data-drawing="{{ post.drawing }}"
+data-id="{{ post.id }}">
+<a href="{{ url_for('post', id=post.id) }}">
+    <img class="drawing-canvas" src="{{ url_for('static', filename='monalisa1.jpeg') }}" alt="Drawing">
+</a>
+</div>
+{% else %}
+<div class="drawing" 
+data-drawing="{{ post.drawing }}"
+data-id="{{ post.id }}">
+<a href="{{ url_for('post', id=post.id) }}">
+    <canvas class="drawing-canvas"></canvas>
+</a>
+</div>
+{% endif %}
