@@ -15,9 +15,6 @@ let gridMode = false
 const gridData = Array(height).fill().map(() => Array(width).fill("white"))
 
 console.log(gridData)
-document.addEventListener('pointerdown', () => {
-    pointerdown = true;
-})
 
 document.addEventListener('pointerup', () => {
     pointerdown = false;
@@ -34,7 +31,11 @@ function gridMaker(width, height){
                 if (pointerdown === true){
                     color(gridItem, row, column)}})
             gridItem.addEventListener('pointerdown', () => {
+                pointerdown = true;
                 color(gridItem, row, column)})
+            gridItem.addEventListener('pointermove', () => {
+                if (pointerdown === true){
+                    color(gridItem, row, column)}})
             gridRow.appendChild(gridItem);
         }
     gridRow.classList.add('grid-row')
