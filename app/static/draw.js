@@ -5,12 +5,14 @@ const width = Number(canvasData.dataset.width);
 const height = Number(canvasData.dataset.height);
 const colorGrid = document.querySelector('#color-grid')
 const gridButton = document.querySelector('#grid-button')
-const finishButton = document.querySelector('#finish-button')
+const clearButton = document.querySelector('#clear-button')
+const brushSize = document.querySelector('#brush-size')
 const form = document.querySelector("form")
 let colorList = ["white","black","blue","red","green","yellow","purple","grey","orange","pink"]
 let current_color = "black"
 let is_drawing = false;
-let gridMode = false
+let gridMode = false;
+// let brush_size = 1;
 
 const gridData = Array(height).fill().map(() => Array(width).fill("white"))
 
@@ -112,12 +114,39 @@ gridButton.addEventListener('pointerdown', () => {
             item.classList.remove('grid-border')
         }
     }
-    console.log(gridData)
 })
+
+
+clearButton.addEventListener('pointerdown', () => {
+    const previousColor = current_color
+    current_color = "white"
+    const gridItem = document.querySelectorAll('.grid-item')
+    for (let item of gridItem){
+        color(item, item.dataset.row, item.dataset.column)
+    }
+    current_color = previousColor
+})
+
+// brushSize.addEventListener('change', () => {
+//     brush_size = Number(brushSize.value)
+//     console.log(`Brush size changed to: ${brush_size}`);
+// })
+
+
+// function size_targeting(row, column){
+//     let size = brush_size - 1
+//     if size > 0{
+//         for let i = 1; i <= size; i++){
+
+//     }
+// }
+
+
 
 
 gridMaker(width, height)
 gridColorSetup(colorList)
+// brush_size = Number(brushSize.value)
 
 form.addEventListener("submit", (event) => {
     document.querySelector("#drawing").value = JSON.stringify(gridData)

@@ -48,6 +48,7 @@
     user-select: none;
 }
 
+
 #color-grid{
     display: flex;
     flex-direction: column;
@@ -74,3 +75,8 @@
     border: 1px solid black;
 }
 
+
+#brush-size-label{
+    margin: 0;
+    display: inline;
+} 
