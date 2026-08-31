@@ -9,15 +9,37 @@ const finishButton = document.querySelector('#finish-button')
 const form = document.querySelector("form")
 let colorList = ["white","black","blue","red","green","yellow","purple","grey","orange","pink"]
 let current_color = "black"
-let pointerdown = false;
+let is_drawing = false;
 let gridMode = false
 
 const gridData = Array(height).fill().map(() => Array(width).fill("white"))
 
-console.log(gridData)
+document.addEventListener('pointerup', () => {
+    is_drawing = false;
+})
+
+
+grid.addEventListener('pointerdown', (e) => {
+    is_drawing = true;
+    const cell = document.elementFromPoint(e.clientX, e.clientY);
+
+    if (cell?.classList.contains('grid-item')){
+        color(cell, cell.dataset.row, cell.dataset.column);
+    }
+})
+
+grid.addEventListener('pointermove', (e) => {
+    if (is_drawing){
+        const cell = document.elementFromPoint(e.clientX, e.clientY);
+        if (cell?.classList.contains('grid-item')){
+            color(cell, cell.dataset.row, cell.dataset.column);
+        }
+    }
+});
+
 
 document.addEventListener('pointerup', () => {
-    pointerdown = false;
+    is_drawing = false;
 })
 
 
@@ -27,21 +49,15 @@ function gridMaker(width, height){
         for (let column=0; column < width; column++){
             const gridItem = document.createElement('div');
             gridItem.classList.add('grid-item');
-            gridItem.addEventListener('pointerover', () => {
-                if (pointerdown === true){
-                    color(gridItem, row, column)}})
-            gridItem.addEventListener('pointerdown', () => {
-                pointerdown = true;
-                color(gridItem, row, column)})
-            gridItem.addEventListener('pointermove', () => {
-                if (pointerdown === true){
-                    color(gridItem, row, column)}})
+            gridItem.dataset.row = row;
+            gridItem.dataset.column = column;
             gridRow.appendChild(gridItem);
         }
     gridRow.classList.add('grid-row')
     grid.appendChild(gridRow)
     }
 }
+
 
 
 function color(gridItem, row, column){
@@ -96,6 +112,7 @@ gridButton.addEventListener('pointerdown', () => {
             item.classList.remove('grid-border')
         }
     }
+    console.log(gridData)
 })
 
 
