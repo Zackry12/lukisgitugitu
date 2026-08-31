@@ -30,6 +30,7 @@
     flex: 1;
     height: 300px;
     user-select: none;
+    touch-action: none;
 }
 
 .grid-row{
